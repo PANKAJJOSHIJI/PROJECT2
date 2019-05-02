@@ -1,11 +1,15 @@
-package business;
+package persistence;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@XmlRootElement
-public class hashmapp {
-	
+@Entity
+@Table(name="hashmap_map")
+public class hashmapp { 
+	@Id
 	private String k;
+
 	private String v;
 	public String getK() {
 		return k;
