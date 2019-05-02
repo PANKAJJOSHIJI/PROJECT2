@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory> 
+
+		<!-- Database connection settings -->
+		<!-- JDBC connection pool (use the built-in) -->
+		
+ <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@10.123.79.59:1521:georli04</property>
+    <property name="hibernate.connection.username">T563008</property>
+    <property name="hibernate.connection.password">T563008</property>
+    <property name="hibernate.show_sql">true</property>
+  		<property name="hibernate.connection.autoReconnect">true</property>  		
+		<mapping class="persistence.TravellerEntity"/>
+		<mapping class="persistence.hashmapp"/>
+		<mapping class="persistence.classname"/>
+		<mapping class="persistence.Tentity"/>
+		<mapping class="persistence.countstar"/>
+		<mapping class="persistence.count1"/>
+  	</session-factory>
+</hibernate-configuration> 
