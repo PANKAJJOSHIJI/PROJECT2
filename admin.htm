@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1252">
+<title>Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--adding google font-->
+<link href="./files/css" rel="stylesheet" type="text/css">
+<link href="./files/css(1)" rel="stylesheet" type="text/css">
+<link href="./files/css(2)" rel="stylesheet" type="text/css">
+<link href="./files/css(3)" rel="stylesheet" type="text/css">
+<link rel="stylesheet"  href="css/bootstrap.css">
+<link rel="stylesheet" href="./files/w3.css">
+
+<script src="js/jquery.js"></script>
+<script>
+
+
+	 $(function(){		 
+		 $('#add').click(function(){
+			 //console.log("clicked");
+			 $.ajax({
+				 url:"http://10.123.225.165:3333/PROJECT2/api/Traveller/add/" +$('#txxt').val(),
+				 method:"POST",
+				 dataType:"text",
+				 cache: "false"				 
+			 })
+				.done(
+						function (msg) {
+							if(msg=="success")
+								$('#error').text("Table created Successfully.")
+							else if(msg=="failure")
+								$('#error').text("Query Sent failed")
+						}
+					)
+					.fail(
+						function(jqXHR, msg) {
+							$('#error').text(jqXHR + " " + msg);
+						}
+					);
+					return false;
+		 });
+	 });
+	 $(function(){		 
+		 $('#addName').click(function(){
+			 console.log("clicked");
+			 $.ajax({
+				 url:"http://10.123.225.165:3333/PROJECT2/api/Traveller/addTrainee/" +$('#text').val() +"/"+$('#combo').val(),
+				 method:"POST",
+				 dataType:"text",
+				 cache: "false"				 
+			 })
+				.done(
+						function (msg) {
+							if(msg=="success")
+								$('#error').text("added Successfully.")
+							else if(msg=="failure")
+								$('#error').text("Query Sent failed")
+						}
+					)
+					.fail(
+						function(jqXHR, msg) {
+							$('#error').text(jqXHR + " " + msg);
+						}
+					);
+					return false;
+		 });
+	 });
+	 
+	
+	 $(document).ready(function () {
+         $.ajax({
+             url: "http://10.123.225.165:3333/PROJECT2/api/Traveller/GetData",
+             datatype: "JSON",
+             type: "Get",
+             success: function (data) {
+                 for(var i=0;i<data.length;i++)
+                 {
+                     var opt = new Option(data[i].name);
+                     $("#combo").append(opt);
+                 }
+             }
+         });
+     });
+	
+	 </script>
+	<style> 
+		/* body
+		{ */
+			/* /*margin:0*/ */
+			/* background-color: lightblue !important;
+		    background-image: url("computer_keyboard_mouse_laptop_mac_apple_66734_1920x1080.v1.jpg"); 
+		    background-repeat: no-repeat;
+		    -webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+		    background-size: cover;
+		    color:black;
+		    text-align:center; */
+		    
+		     
+		    /* /* background-position: center center; */ */
+		/* } */
+		
+		/* *{
+			margin:0;
+			padding:0;
+		} */
+		
+		body
+		{
+			background-image: url("155470491630684746.jpg"); 
+		    background-repeat: no-repeat;
+		    -webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+		    background-size: cover;
+		}
+		.load
+		{
+			animation: slide 20s;
+		}
+		
+		.slider
+		{
+			 background-repeat: no-repeat;
+			 background-size: cover;
+			 background-position: center;
+			 width:100%;
+			 height:100vh;
+			 animation: slide 40s infinite; 		
+		}
+		
+		.content
+		{
+			color:#fff;
+			width:100%;
+			height:100vh;
+			background-color:rgb(0,0,0,0.5);
+		}
+		
+		.principal
+		{
+			left:50%;
+			top:50%;
+			transform:translate(-50%,-50%);
+			position:absolute;
+			background-color:rgb(0,0,0,0.5);
+			/* letter-spacing:5px; */
+			text-align:center;
+			color:black;
+		}
+		
+		@keyframes slide
+		{
+			0%
+			{
+				background-image: url("apple_brand_imac_desk_keyboard_79998_1920x1080.jpg");
+			}
+			
+			20%
+			{
+				background-image: url("apple_macbook_airbook_computer_mouse_106498_1280x720.jpg");
+			}
+			
+			20.01%
+			{
+				background-image: url("apple_macbook_imac_109739_1920x1080.jpg");
+			}
+			
+			40%
+			{
+				background-image: url("computer_keyboard_mouse_laptop_mac_apple_66734_1920x1080.v1.jpg");
+			}
+			
+			40.01%
+			{
+				background-image: url("imac_apple_computer_table_cup_notebook_109176_1280x720.jpg");
+			}
+			
+			60%
+			{
+				background-image: url("laptop_cup_glasses_plant_114948_1920x1080.jpg");
+			}
+			
+			60.01%
+			{
+				background-image: url("laptop_macbook_iphone_apple_journal_glasses_113949_1920x1080.jpg");
+			}
+			
+			80%
+			{
+				background-image: url("laptop_room_on_the_desk_keyboard_mouse_apple_window_interior_73963_1920x1080.jpg");
+			}
+			
+			80.01%
+			{
+				background-image: url("mac_apple_notebook_mouse_computer_white_gray_29674_1280x720.jpg");
+			}
+			
+			100%
+			{
+				background-image: url("toolsandtoys_20141001_01.jpg");
+			}
+			
+		}
+		
+		.select-css 
+		{
+		    display: block;
+		    font-size: 16px;
+		    font-family: sans-serif;
+		    font-weight: 700;
+		    color: #444;
+		    line-height: 1.3;
+		    padding: .6em 1.4em .5em .8em;
+		    width: 100%;
+		    max-width: 100%; 
+		    box-sizing: border-box;
+		    margin: 0;
+		    border: 1px solid #aaa;
+		    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+		    border-radius: .5em;
+		    -moz-appearance: none;
+		    -webkit-appearance: none;
+		    appearance: none;
+		    background-color: #fff;
+		    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+		      linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+		    background-repeat: no-repeat, repeat;
+		    background-position: right .7em top 50%, 0 0;
+		    background-size: .65em auto, 100%;
+		}
+		.select-css::-ms-expand 
+		{
+		    display: none;
+		}
+		.select-css:hover
+		{
+		    border-color: #888;
+		}
+		.select-css:focus 
+		{
+		    border-color: #aaa;
+		    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+		    box-shadow: 0 0 0 3px -moz-mac-focusring;
+		    color: #222; 
+		    outline: none;
+		}
+		.select-css option 
+		{
+		    font-weight:normal;
+		}
+		
+		/* .bordering 
+		{
+			top:65px;
+			border-radius: 25px;
+		  	background:#a3a3a2d7;  */
+		  /* background: rgb(63,190,252); */
+		    /* border:black; */ 
+		    /* padding:20px;
+		    padding-left:100px;
+		    padding-right:100px; */
+		  
+		/*    border:2px solid white;
+		}
+		
+		.bordering-side 
+		{
+		    border-radius: 25px;
+		    background-border:black;  */
+		  /*    background:#a3861d; */ 
+		 /*    padding: 20px;
+		    left:10px;
+		    
+		} */
+	</style>
+</head>
+
+<body>
+
+	<div class="slider">
+		<div class="load">
+		</div>
+		<div class="content">
+			<div class="principal">
+				<div class="row" style="top:-30px">
+					<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6">
+						<label for="txxt">Class Name:</label><br>
+						<input class="w3-input" type="text" name ="txtcombo" id="txxt" style="width: 100%;text-align:center;" placeholder="Enter new Class Name">
+						<div class="w3-group">
+							<h4 id="error"></h4>
+						</div>
+						<button type="button" class="btn btn-success" id="add" style="width: 40%;border:2px solid green;margin-top: -30px">Add Class</button>
+						<br><br><br><br>
+						<!-- <b>List of Class:  </b> -->
+						<select class="select-css" name="combo" id="combo" style="width: 100%;">
+									  <option selected="selected">Select Class</option>
+									  </select>
+						<br>
+					</div>
+					<input class="w3-input" type="text" name ="txtcombo" id="text" style="width: 100%;text-align:center" placeholder="Enter Student Name">
+					<br>
+					<button type="button" class="btn btn-success" id="addName" style="width: 40%;border:2px solid green">Add Student Name</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- <div class="w3-row">
+		<form class="w3-container myForm  w3-card-4" id="form1">
+			<div class="w3-group ">
+				<input class="w3-input" type="text" name ="txtcombo" id="txxt" style="width: 100%;">
+				<label class="w3-label">Class Name</label>
+				<div class="w3-group">
+					<h4 id="error"></h4>
+				</div>
+				<button type="button" class="w3-btn w3-center w3-blue w3-margin-4" id="add">Add</button>
+				<br/>
+				List of Class:<select name="combo" id="combo">
+				<option selected="selected">Select</option>
+				</select>
+			</div>
+			<input class="w3-input" type="text" name ="txtcombo" id="text" style="width: 100%;">
+			<button type="button" class="w3-btn w3-center w3-blue w3-margin-4" id="addName" >AddName</button>
+		</form>
+	</div>	 -->	
+			
+
+
+</body>
+</html>

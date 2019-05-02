@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1252">
+<title>Query</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--adding google font-->
+ <link href="./files/css" rel="stylesheet" type="text/css">
+<link href="./files/css(1)" rel="stylesheet" type="text/css">
+<link href="./files/css(2)" rel="stylesheet" type="text/css">
+<link href="./files/css(3)" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./files/w3.css">
+
+
+<link rel="stylesheet"  href="css/bootstrap.css">  
+
+<script src="js/jquery.js"></script>
+
+<script>
+$(function(){		 
+  	 $('#fast').click(function(){
+  		$('.enableOnInput').prop('disabled', false);//button click
+  		 console.log("clicked");
+  	     var a=1
+  		 $.ajax({
+  			 url:"http://localhost:3333/PROJECT2/api/Traveller/fast/" +a,
+  			 method:"POST",
+  			 dataType:"text",
+  			 cache: "false"				 
+  		 })
+  		 $('.enableOnInput').prop('disabled', true);
+  			return true;
+  	     
+  	 });
+  });
+   
+   $(function(){		 
+     	 $('#slow').click(function(){ 
+     		$('.enableOnInput').prop('disabled', false);//button click
+     		 console.log("clicked");
+     		 var b=1
+     		 $.ajax({
+     			 url:"http://localhost:3333/PROJECT2/api/Traveller/slow/" +b,
+     			 method:"POST",
+     			 dataType:"text",
+     			 cache: "false"				 
+     		 })
+     		 $('.enableOnInput').prop('disabled', true);
+     		return true;
+      	 });
+      });
+$(function(){		 
+	 $('#signin').click(function(){
+		 console.log("clicked");
+		 $.ajax({
+			 url:"http://localhost:3333/PROJECT2/api/Traveller/signin/" +$('#email').val() +"/"+$('#text').val(),
+			 method:"POST",
+			 dataType:"text",
+			 cache: "false"				 
+		 })
+			.done
+			(
+					function (msg) 
+					{
+						if(msg=="success")
+						{
+						$(	function()
+							{
+								$.ajax
+								({
+									url:"http://localhost:3333/PROJECT2/api/Traveller/getall",
+									method:'GET',
+									dataType:'json',
+									cache:'false'
+								})		
+								.done
+								(
+									function(array1)
+									{
+										var s1=''
+									
+										$.each(array1, function(i,element)
+												{
+													s1=element.id;
+												}
+										);
+										$('#success').text("Your Doubt id : " +s1)
+									}		
+								)
+								
+								.fail
+								(
+									function(jqXHR, message)
+									{
+										console.log(jqXHR+" "+message)
+									}		
+								);
+								return false;
+								
+							}	
+						)
+						}	
+						else if(msg=="failure")
+							$('#error').text("Query Sent failed.")
+					}
+				)
+				.fail(
+					function(jqXHR, msg) {
+						$('#error').text(jqXHR + " " + msg);
+					}
+				);
+				return false;
+	 });
+});
+function printChecked(){
+	var items=document.getElementsByName('ids');
+	console.log(items)
+	var count=0;
+	for(var i=0; i<items.length; i++){
+		if(items[i].type=='checkbox' && items[i].checked==true)
+			count=count+1;
+	}
+	console.log(count)
+
+	$(
+			function(){
+				$('#fetch').click(function(){
+		
+				 $.ajax({
+				 url:"http://localhost:3333/PROJECT2/api/Traveller/star/" +count,
+				 method:"POST",
+				 dataType:"text",
+				 cache: "false"				 
+			 })
+									return false;
+	
+				})
+	 });
+				
+	
+	}
+
+
+	
+	 </script>
+<style>
+.star {
+    visibility:hidden;
+    font-size:30px;
+    cursor:pointer;
+  color:gold;
+}
+.star:before {
+   content: "\2605";
+   position: absolute;
+   visibility:visible;
+
+}
+.star:checked:before {
+   content: "\2606";
+   position: absolute;
+    color:aqua;
+}
+</style>
+</head>
+
+<body>
+
+	<div class="col-md-5 col-md-offset-4">
+	<div class="row">
+	    <div class="img-area">
+	        <img src="mail.jpg" alt="">
+	      </div>
+	      <br>
+	      <div style="text-align: left;color:black">
+	      <i class="fa fa-user" aria-hidden="true" style="font-size:120%;font-weight:bold;margin-bottom: 10px"> Username</i>
+	       <input class="w3-input" type="text" name ="txtcombo"  placeholder="Enter your Username" id="text" style="width: 100%">
+	       </div>
+    <div class="form-group" style="color:black">
+            <label for="email"><br>
+           <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:130% "></i>Query</label>
+ 
+      
+       <br/>
+            <textarea  cols="40" class="form-control" id="email" style=" height: 150px; color:black;
+             font-weight: normal" placeholder="Type your query here..."  formControlName="email" ></textarea>
+          </div>
+          <div class="w3-group">
+				<h4 id="success"></h4>
+			</div>
+             
+          <button id="signin" class="btn btn-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Send</button> 
+          <br>
+     </div>
+	</div>
+	<button type="button" id="fast" class='enableOnInput'  >Go fast!</button>
+<button type="button" id="slow" class='enableOnInput' >Go slow!</button>
+<div>
+	 <label>Provide your Ratings for the current module</label>
+          
+             <form id="ratingsForm">
+  <div id="target"  class="stars">
+                 
+<script>
+for (i = 1; i <=5; i++) {
+    var radioBtn = $('<input type="checkbox"   class="star" name="ids" value='+i+' >');
+    radioBtn.appendTo('#target');
+}</script>
+</div></form> 
+
+  </div>
+<button type="button" id="fetch" class="btn btn-danger" align=center onclick='printChecked()'>Update1</button>
+</div>
+</body>
+</html>
